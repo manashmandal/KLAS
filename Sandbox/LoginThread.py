@@ -59,6 +59,7 @@ class LoginThread(QThread):
             book_info_list = self.get_book_data()
             book_info_list_qstring = QStringList(book_info_list)
             self.emit(SIGNAL('fetch_book_data(QStringList)'), book_info_list_qstring)
+            self.libraryBrowser.close()
 
 
     # Returns QStringList

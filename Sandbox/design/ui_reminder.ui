@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Reminder</class>
+ <widget class="QWidget" name="Reminder">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>421</width>
+    <height>187</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Reminder</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="2">
+    <widget class="QPushButton" name="setReminderPushButton">
+     <property name="text">
+      <string>Set Reminder and Forget!</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="QTableWidget" name="bookInfoTable">
+     <column>
+      <property name="text">
+       <string>Book Name</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Due Date</string>
+      </property>
+      <property name="font">
+       <font>
+        <italic>true</italic>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Call No</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Renewals Left</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <spacer name="buttonSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="setCalendarPushButton">
+     <property name="text">
+      <string>Set Google Calendar</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

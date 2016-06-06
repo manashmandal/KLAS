@@ -1,9 +1,8 @@
 import sys
 from PyQt4 import uic, QtGui
 from PyQt4.QtCore import SIGNAL
-from PyQt4.QtCore import QStringList
-from PyQt4.QtCore import QString
 from LoginThread import LoginThread
+from Reminder import Reminder
 import ast
 
 #Login design path
@@ -27,7 +26,7 @@ class Login(QtGui.QWidget, Ui_LoginWidget):
         self.passwordLineEdit.setText('051203043')
 
         # Button
-
+        self.nextPushButton.clicked.connect(self.create_reminder_widget)
         # Info
         self.book_info_dict_list = []
 
@@ -37,6 +36,9 @@ class Login(QtGui.QWidget, Ui_LoginWidget):
 
 
     def check_login(self):
+        # Disabling nextPushButton
+        self.nextPushButton.setEnabled(False)
+
         self.ID = str(self.IDLineEdit.text())
         self.password = str(self.passwordLineEdit.text())
 
@@ -52,11 +54,11 @@ class Login(QtGui.QWidget, Ui_LoginWidget):
         self.status = str(status)
         self.statusLabel.setText(self.status)
 
-        #Enable next on successful login
-        if "Successfully logged" in self.status:
-            self.nextPushButton.setEnabled(True)
-        elif "incorrect" in self.status:
-            self.nextPushButton.setEnabled(False)
+        # #Enable next on successful login
+        # if "Successfully logged" in self.status:
+        #     self.nextPushButton.setEnabled(True)
+        # elif "incorrect" in self.status:
+        #     self.nextPushButton.setEnabled(False)
 
 
 
@@ -75,7 +77,14 @@ class Login(QtGui.QWidget, Ui_LoginWidget):
             self.book_info_dict_list.append(item_to_dict)
 
         print self.book_info_dict_list
+        self.nextPushButton.setEnabled(True)
 
+
+
+    def create_reminder_widget(self):
+        self.reminder_widget = Reminder(self.book_info_dict_list)
+        self.reminder_widget.show()
+        self.book_info_dict_list = []
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
