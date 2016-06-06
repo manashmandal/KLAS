@@ -1,5 +1,6 @@
 from PyQt4 import QtCore, QtGui, uic
 from PyQt4.QtGui import QTableWidget, QTableWidgetItem
+from google_calendar import GoogleCalendar
 
 ui_reminder = 'design/ui_reminder.ui'
 
@@ -19,6 +20,8 @@ class Reminder(QtGui.QWidget, Ui_ReminderWidget):
 
         self.init_ui()
 
+        self.setReminderPushButton.clicked.connect(self.startCalendar)
+
     def init_ui(self):
         for row, item in enumerate (self.book_info_dicts):
             self.bookInfoTable.setItem(row, 0, QTableWidgetItem(item['title']))
@@ -28,3 +31,6 @@ class Reminder(QtGui.QWidget, Ui_ReminderWidget):
 
     def __del__(self):
         del self.book_info_dicts
+
+    def startCalendar(self):
+        calendar = GoogleCalendar()

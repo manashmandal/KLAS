@@ -30,10 +30,10 @@ class LoginThread(QThread):
 
         # browser
         # Use phantomjs for release
-        #self.libraryBrowser = webdriver.PhantomJS('C:\Users\Manash\Downloads\Compressed\phantomjs\phantomjs.exe')
+        self.libraryBrowser = webdriver.PhantomJS('C:\Users\Manash\Downloads\Compressed\phantomjs\phantomjs.exe')
 
         # Use Chrome as default engine
-        self.libraryBrowser = webdriver.Chrome()
+        # self.libraryBrowser = webdriver.Chrome()
 
         self.libraryBrowser.get(self.libraryUrl)
         time.sleep(1)

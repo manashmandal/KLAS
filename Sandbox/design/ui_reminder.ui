@@ -17,14 +17,14 @@
    <string>Reminder</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="2">
+   <item row="2" column="1">
     <widget class="QPushButton" name="setReminderPushButton">
      <property name="text">
       <string>Set Reminder and Forget!</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="3">
+   <item row="0" column="0" colspan="2">
     <widget class="QTableWidget" name="bookInfoTable">
      <column>
       <property name="text">
@@ -77,13 +77,6 @@
       </size>
      </property>
     </spacer>
-   </item>
-   <item row="2" column="1">
-    <widget class="QPushButton" name="setCalendarPushButton">
-     <property name="text">
-      <string>Set Google Calendar</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>
