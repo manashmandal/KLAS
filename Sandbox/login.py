@@ -1,6 +1,8 @@
 import sys
 from PyQt4 import uic, QtGui
 from PyQt4.QtCore import SIGNAL
+from PyQt4.QtCore import QStringList
+from PyQt4.QtCore import QString
 from LoginThread import LoginThread
 import ast
 
@@ -41,7 +43,7 @@ class Login(QtGui.QWidget, Ui_LoginWidget):
 
         # Connecting the thread
         self.connect(self.loginThread, SIGNAL('update_status(QString)'), self.update_status)
-        self.connect(self.loginThread, SIGNAL('fetch_book_data(QString)'), self.fetch_book_data)
+        self.connect(self.loginThread, SIGNAL('fetch_book_data(QStringList)'), self.fetch_book_data)
 
     def update_status(self, status):
         self.status = str(status)
@@ -55,13 +57,15 @@ class Login(QtGui.QWidget, Ui_LoginWidget):
 
 
 
-    def fetch_book_data(self, info):
+    def fetch_book_data(self, info_list):
         """
         TODO:
         Get's all info on logging in to library
         """
-        info_dict = ast.literal_eval(str(info))
-        print info_dict
+        # info_dict = ast.literal_eval(str(info))
+        # print info_dict
+        for item in info_list:
+            print str(item)
 
 
 if __name__ == '__main__':

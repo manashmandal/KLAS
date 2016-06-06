@@ -1,4 +1,4 @@
-from PyQt4 import QtGui
+from PyQt4.QtCore import QStringList
 from PyQt4.QtCore import QThread, SIGNAL
 from selenium import webdriver
 import time
@@ -19,6 +19,7 @@ class LoginThread(QThread):
 
         self.number_of_books = 0
         self.book_info = ''
+        self.book_info_list = []
 
     def __del__(self):
         self.wait()
@@ -54,21 +55,34 @@ class LoginThread(QThread):
             self.libraryBrowser.close()
         else:
             self.emit(SIGNAL('update_status(QString)'), 'Successfully logged in')
-            self.get_book_data()
+            self.sleep(1)
+            book_info_list = self.get_book_data()
+            book_info_list_qstring = QStringList(book_info_list)
+            self.emit(SIGNAL('fetch_book_data(QStringList)'), book_info_list_qstring)
 
 
+    # Returns QStringList
     def get_book_data(self):
         parent_tbody = self.libraryBrowser.find_element_by_tag_name('tbody')
-        # child_tr = parent_tbody.find_elements_by_tag_name('tr')
+
 
         for child in parent_tbody.find_elements_by_tag_name('tr'):
             self.number_of_books += 1
-            self.book_info += child.find_element_by_class_name('title').text + '\n'
-            self.book_info += child.find_element_by_class_name('date_due').text + '\n'
-            self.book_info += child.find_element_by_class_name('call_no').text + '\n'
-            self.book_info += child.find_element_by_class_name('renew').text + '\n'
 
-            print self.book_info
+            title = child.find_element_by_class_name('title').text
+            date_due = child.find_element_by_class_name('date_due').text
+            call_no = child.find_element_by_class_name('call_no').text
+            renewals = child.find_element_by_class_name('renew').text
+
+            # Makes a dict type string
+            self.book_info = "{ 'title' : '" + title + "',"
+            self.book_info += "'date_due' : '"  + date_due + "', "
+            self.book_info += "'call_no' : '" + call_no  + "', "
+            self.book_info += "'renewals: '" + renewals + "' }"
+
+            self.book_info_list.append(self.book_info)
+
+        return self.book_info_list
 
 
 
