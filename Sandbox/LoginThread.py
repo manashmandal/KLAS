@@ -17,6 +17,8 @@ class LoginThread(QThread):
         self.libraryUrl = 'http://library.kuet.ac.bd'
         self.loggedIn = False
 
+        self.number_of_books = 0
+        self.book_info = ''
 
     def __del__(self):
         self.wait()
@@ -57,11 +59,17 @@ class LoginThread(QThread):
 
     def get_book_data(self):
         parent_tbody = self.libraryBrowser.find_element_by_tag_name('tbody')
-        child_tr = parent_tbody.find_elements_by_tag_name('tr')
-        
+        # child_tr = parent_tbody.find_elements_by_tag_name('tr')
 
-        for item in child_tr:
-            print item.text
+        for child in parent_tbody.find_elements_by_tag_name('tr'):
+            self.number_of_books += 1
+            self.book_info += child.find_element_by_class_name('title').text + '\n'
+            self.book_info += child.find_element_by_class_name('date_due').text + '\n'
+            self.book_info += child.find_element_by_class_name('call_no').text + '\n'
+            self.book_info += child.find_element_by_class_name('renew').text + '\n'
+
+            print self.book_info
+
 
 
 
