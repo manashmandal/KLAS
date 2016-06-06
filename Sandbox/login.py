@@ -28,6 +28,9 @@ class Login(QtGui.QWidget, Ui_LoginWidget):
 
         # Button
 
+        # Info
+        self.book_info_dict_list = []
+
     def init_ui(self):
         self.loginPushButton.clicked.connect(self.check_login)
         self.nextPushButton.setEnabled(False)
@@ -65,7 +68,13 @@ class Login(QtGui.QWidget, Ui_LoginWidget):
         # info_dict = ast.literal_eval(str(info))
         # print info_dict
         for item in info_list:
-            print str(item)
+            # Deleting unnecessary strings TODO: upgrade later
+            the_item = str(item)
+            the_item = the_item.replace('Renew\n(', '').replace(' of 5 renewals remaining)', '')
+            item_to_dict = ast.literal_eval(the_item)
+            self.book_info_dict_list.append(item_to_dict)
+
+        print self.book_info_dict_list
 
 
 if __name__ == '__main__':

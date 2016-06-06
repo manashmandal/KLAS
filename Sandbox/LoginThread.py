@@ -78,7 +78,7 @@ class LoginThread(QThread):
             self.book_info = "{ 'title' : '" + title + "',"
             self.book_info += "'date_due' : '"  + date_due + "', "
             self.book_info += "'call_no' : '" + call_no  + "', "
-            self.book_info += "'renewals: '" + renewals + "' }"
+            self.book_info += "'renewals' : '" + renewals + "' }"
 
             self.book_info_list.append(self.book_info)
 
