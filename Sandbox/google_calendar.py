@@ -2,7 +2,7 @@ from __future__ import print_function
 from httplib2 import Http
 from oauth2client import file, client, tools
 from googleapiclient.discovery import build
-
+import time
 
 try:
     import argparse
@@ -10,7 +10,9 @@ try:
 except ImportError:
     flags = None
 
+
 class GoogleCalendar:
+
     def __init__(self):
         SCOPES = "https://www.googleapis.com/auth/calendar"
         store = file.Storage('storage.json')
@@ -30,5 +32,14 @@ class GoogleCalendar:
             'end': {'dateTime': '2016-06-28T22:00:00%s' % GMT_OFF},
         }
 
-        e = CAL.events().insert(calendarId='primary', sendNotifications=True, body=EVENT).execute()
+        self.e = CAL.events().insert(calendarId='primary', sendNotifications=True, body=EVENT).execute()
+
+        url = self.e.get('htmlLink')
+        eid = url[url.find('=') + 1:]
+
+        print ("eventid : %s" % eid)
+
+
+
+
 
